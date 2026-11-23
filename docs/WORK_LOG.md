@@ -30,3 +30,19 @@
 - 已确认 Manifest 存在广泛存储、安装 APK、局域网发现、前台播放等权限声明；需逐项追踪调用点，不可直接批量删除。
 - 已确认原工作流除构建外还包含 Release 创建 / 清理和 Bugly mapping 上传副作用。
 - 上述发现详见 `docs/BASELINE_AUDIT.md`。本日志不将审计建议描述为已实施改动。
+
+## 2026-11-23：建立无患影音独立构建入口
+
+### 已完成
+
+- 新增 `.github/workflows/wuhuan-build.yml`，只监听 `wuhuan/development` 分支的源码变更，并支持手动触发。
+- 工作流使用 JDK 21、Python 3.10、Android SDK 和 Gradle，构建 `:app:assembleMobileArm64_v8aRelease`。
+- 构建产物仅上传为 GitHub Actions Artifact，保留 14 天。
+- 新工作流未配置 Release 创建/删除、Bugly mapping 上传或第三方更新发布步骤；权限仅授予 `contents: read`。
+- 工作流提交：`b071ab3574d60bd20806c21fa173ee68c3f83e91`。
+
+### 尚未验证
+
+- 新工作流文件已入库，但尚未取得 Actions 实际运行结果；不能称云端构建已成功。
+- Release variant 在未提供签名 secrets 时会按当前 Gradle 配置回退到 debug 签名；这是测试产物，不是可覆盖正式安装包的发布签名。
+- 目前仍未修改播放器业务源码或生成 APK。
