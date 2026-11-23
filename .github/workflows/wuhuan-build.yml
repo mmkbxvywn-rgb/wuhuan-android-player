@@ -1,0 +1,61 @@
+name: 无患影音 Android 构建
+
+on:
+  push:
+    branches:
+      - wuhuan/development
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: wuhuan-android-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-mobile:
+    name: Build Android mobile APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK packages
+        run: |
+          yes | sdkmanager --licenses >/dev/null
+          yes | sdkmanager --channel=3 "platforms;android-37.0" "build-tools;36.0.0"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build mobile arm64 release variant
+        run: |
+          chmod +x ./gradlew
+          ./gradlew :app:assembleMobileArm64_v8aRelease --no-daemon --console=plain
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wuhuan-android-mobile-arm64-${{ github.run_number }}
+          path: app/build/outputs/apk/mobileArm64_v8a/release/*.apk
+          if-no-files-found: error
+          retention-days: 14
