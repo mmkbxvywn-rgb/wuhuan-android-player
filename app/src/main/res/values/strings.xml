@@ -1,6 +1,6 @@
 <resources xmlns:xliff="http://schemas.android.com/apk/res-auto">
 
-    <string name="app_name">揽星影视</string>
+    <string name="app_name">无患影音</string>
 
     <!-- Live -->
     <string name="live_pass">Password</string>

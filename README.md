@@ -1,85 +1,68 @@
-# 揽星影视
+# 无患影音
 
-适用于 Android 手机（含平板 / 折叠屏）的影音应用，基于 [FongMi/TV](https://github.com/FongMi/TV) 二次开发。整合媒体浏览与播放体验，兼容 TVBox（JSON）接口协议，并支持外部配置与 [CatVod](https://github.com/CatVodTVOfficial/CatVodTVJarLoader) Spider 接口扩展。
+无患影音是一款面向 Android 手机和平板的本地与网络影音播放器。项目以成熟的 Android 播放与影视源兼容代码为技术底座，逐步形成独立的产品界面、隐私策略和维护体系。
 
-**App 本身不内置或提供任何内容来源。** 外部内容需自行配置，也可打开本地媒体文件或推送媒体网址。
+**应用不内置影视内容或视频源。** 用户可以自行导入兼容的影视源配置，也可以打开本地媒体文件、粘贴媒体地址，或从浏览器分享媒体链接。
 
-## 项目简介
+## 产品原则
 
-揽星影视在 FongMi/TV 上游内核基础上做了面向手机端的体验改造，主要差异点：
+- 无广告 SDK、广告位、开屏推广和强制会员。
+- 默认不向第三方发送崩溃遥测、设备标识或使用行为数据。
+- 不自动检查原作者更新，不自动下载或安装第三方 APK。
+- 本地媒体与用户主动配置的网络媒体是核心功能。
+- 不捆绑内容源；内容来源由用户自行选择并承担合法合规责任。
+- 不承诺所有网站、Spider 或编码格式均可播放；兼容性以实际测试为准。
 
-- **毛玻璃 UI**：播放页、设置页、弹窗等大量采用毛玻璃（Blur）风格。
-- **自定义底部导航 Tab**：首页底部导航可自定义排序与显隐。
-- **画中画（PiP）**：手机端支持播放画中画。
-- **直播增强**：直播 EPG 节目单、Catchup 回看与时移。
-- **投屏**：DLNA 发送端（手机）自研轻量 SSDP 发现 + SOAP 控制栈；接收端沿用 jupnp。
-- **多仓 / 多源聚合**：仓库管理支持多源聚合与线路合集双模式，一键切换、刷新、复制、删除。
-- **首页推荐位**：对接豆瓣榜单、站点推荐、电视榜等 home 数据。
-- **音效模式**：影院 / 重低音 / 3D 环绕 / HiFi / 人声等多档 EQ 预设。
-- **Bugly 上报**与基于 GitHub Releases 的在线更新检查（用版本号判断新版本，逻辑与揽星TV一致）。
+> 应用本身不展示广告，不代表第三方视频源或视频内容中不存在广告。播放器无法保证去除已经合成在视频画面中的广告。
 
-> 播放内核**仅使用 ExoPlayer（Media3）**，原 MPV 分支已移除。
+## 当前技术基线
 
-## 开始使用
+- Android 手机 / 平板优先；Android TV 后续单独适配。
+- 播放内核：AndroidX Media3 / ExoPlayer。
+- 影视源生态：TVBox JSON 配置及 CatVod Spider 兼容架构。
+- 当前内部 Java namespace 仍沿用上游包路径以降低迁移风险；独立安装包 ID 为 `com.wuhuan.player`。
+- 最低 Android 版本以 Gradle 配置为准。
+- 项目许可证：GPL-3.0。分发衍生版本时，需履行许可证、版权声明及对应源码提供义务。
 
-1. 安装适合设备的 APK：仅发布手机版 `mobile`，64 位 `arm64-v8a`。最低要求 Android 7.0（API 24）。电视版（`leanback`）已停止维护与分发，已装电视版的用户直接覆盖安装手机版即可，数据与配置保留。旧的 5.4.x 版本线同样已停止维护，5.4 用户可直接覆盖安装当前版本，签名一致，数据与配置保留。
-2. 在设置中加入自己的配置（兼容 TVBox JSON 接口），格式与字段见[配置范例](https://fongmi.github.io/TV/config/#examples)。
-3. 也可从系统文件管理器打开本地媒体文件，或通过推送入口播放媒体网址。
+## 构建
 
-## 主要功能
+构建环境：
 
-- **播放**：Media3 / ExoPlayer；字幕、弹幕、音轨、倍速、片头 / 片尾跳过、屏显（分辨率 / 网速 / 电量）。
-- **浏览与管理**：分类筛选、搜索、播放记录、收藏与无痕模式。
-- **播放列表**：M3U / TXT / JSON 格式、列表分组与 XMLTV 节目信息。
-- **直播**：EPG 节目单、Catchup 回看与时移、半屏 / 全屏布局。
-- **操作**：电视遥控器、手机手势、画中画、后台音频。
-- **互通**：DLNA 投屏（发送 / 接收）、本地 HTTP 控制。
+- JDK 21
+- Android SDK（compileSdk 版本见 `gradle/libs.versions.toml`）
+- Python 3.10（Chaquopy 模块需要）
 
-实际能力依配置、媒体、播放引擎与设备而异；本地 HTTP API 仅供可信局域网使用，不要直接转发到公网。
+手机版 ARM64 构建命令：
 
-## 开发文档
-
-| 文档 | 内容 |
-| --- | --- |
-| [App 功能](https://fongmi.github.io/TV/features/) | 操作与功能介绍（上游通用） |
-| [配置字典](https://fongmi.github.io/TV/config/) | 配置字段、网络设置与 JSON 示例 |
-| [扩展接口](https://fongmi.github.io/TV/spider/) | Java / Python / JavaScript 示例、方法与返回格式 |
-| [本地 API](https://fongmi.github.io/TV/local/) | 播放控制、推送、文件与同步端点 |
-
-这四篇是上游通用文档，只讲能力边界，不含揽星自己的改动（投屏、更新检查、上报等）。揽星的更新记录看仓库提交历史，APK 见 [Releases](https://github.com/cyj265/lanxing-vod/releases)。
-
-`app/src/main/` 为共用逻辑，`app/src/mobile/` 为手机版 UI。模块列表见 [settings.gradle](settings.gradle)，SDK 与依赖版本见 [libs.versions.toml](gradle/libs.versions.toml)。
-
-`app/src/leanback/`（电视版源码）当前**不参与编译**：其 flavor 与依赖在 `app/build.gradle` 中已注释停用，保留目录只是方便日后重启电视版。大屏设备（平板 / 折叠屏，smallestWidth ≥ 600dp）走的是 `app/src/mobile/res/layout-sw600dp/`。
-
-## Windows 构建
-
-先准备以下环境与文件：
-
-- **JDK 21、Android SDK、Python 3.10**。SDK 平台版本依 `compileSdk` 设置；Python 用于 chaquo 模块。
-- **配套 AAR**：`app/libs/` 内的 5 个 `*-release.aar`（thunder 迅雷下载器 / tvbus / forcetech / jianpian / hook）**已纳入 Git**，clone 下来即可直接构建，无需另外准备。自行新增私有 AAR 时注意别把它们提交上去。
-- **自己的签名文件与 `local.properties`**：在仓库根目录创建下列配置，将所有示例值替换成自己的数据。
-
-```properties
-sdk.dir=C:/Android/Sdk
-storeFile=C:/keys/lanxing.jks
-keyAlias=your-key-alias
-storePassword=your-keystore-password
+```bash
+./gradlew :app:assembleMobileArm64_v8aRelease
 ```
 
-密钥密码与 keystore 密码共用 `storePassword`；不要提交签名文件或真实密码。
+APK 输出目录：
 
-在仓库根目录以 PowerShell 执行：
-
-```powershell
-# 手机版（当前唯一发布的包）
-.\gradlew.bat :app:assembleMobileArm64_v8aRelease
+```
+app/build/outputs/apk/mobileArm64_v8a/release/
 ```
 
-如需本地编译电视版 `leanback`，需先自行解除 `app/build.gradle` 里 `leanback` flavor 与 `leanbackImplementation` 依赖的注释。
+仓库 GitHub Actions 工作流只构建并上传临时 Artifact，不自动创建 Release、删除 Release 或发布更新。未配置正式签名密钥时，构建产物使用 debug 签名，仅用于测试。
 
-产物输出到 `app/build/outputs/apk/mobileArm64_v8a/release/`（文件名形如 `揽星影视-mobile-arm64_v8a-<构建号>.apk`）。签名不同的 APK 不能直接覆盖既有安装。网站位于 `website/`，可独立构建，不需编译 Android App。
+## 影视源配置
+
+当前版本沿用底座已有的 TVBox JSON / Spider 配置能力。应用不提供默认内容源；用户需要在应用内自行导入可信配置。不同配置可能依赖不同的网络协议、脚本运行环境和第三方服务，不能仅凭“导入成功”认定所有站点均可正常播放。
+
+后续将补充无患影音自己的配置管理说明、兼容性清单和可重复测试样例。
+
+## 项目文档
+
+- [项目计划](docs/PROJECT_PLAN.md)
+- [工作日志](docs/WORK_LOG.md)
+- [源码基线审计](docs/BASELINE_AUDIT.md)
+- [UI 结构审计](docs/UI_BASELINE_AUDIT.md)
+
+## 致谢与来源
+
+本项目基于 [FongMi/TV](https://github.com/FongMi/TV) 及 [cyj265/lanxing-vod](https://github.com/cyj265/lanxing-vod) 的开源代码开展二次开发。保留并尊重上游许可证与版权声明。无患影音的独立改造以本仓库工作分支为准。
 
 ## 免责声明
 
-本应用仅供学习与个人使用。使用者需自行确保所配置内容来源合法合规，作者不对任何第三方内容负责。
+本应用仅提供媒体播放与用户配置管理能力，不提供影视内容、播放地址或第三方内容服务。用户应确保自行配置和播放的内容来源合法合规。

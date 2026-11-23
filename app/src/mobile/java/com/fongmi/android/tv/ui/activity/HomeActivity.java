@@ -21,7 +21,6 @@ import androidx.viewbinding.ViewBinding;
 
 import com.fongmi.android.tv.App;
 import com.fongmi.android.tv.R;
-import com.fongmi.android.tv.Updater;
 import com.fongmi.android.tv.api.config.LiveConfig;
 import com.fongmi.android.tv.api.config.VodConfig;
 import com.fongmi.android.tv.api.config.WallConfig;
@@ -68,7 +67,6 @@ public class HomeActivity extends BaseActivity {
     private static final int TAB_VOD = 0;
     private static final int TAB_HISTORY = 1;
     private static final int TAB_SETTING = 2;
-    private static final long UPDATE_CHECK_INTERVAL = 6 * 60 * 60 * 1000L;
 
     private FragmentStateManager mManager;
     private ActivityHomeBinding mBinding;
@@ -110,16 +108,6 @@ public class HomeActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         if (mGlass != null) mGlass.setActive(true);
-        checkUpdateIfNeeded();
-    }
-
-    /** 回到前台时节流检查更新，避免 App 长期不重启就一直收不到新版本提示 */
-    private void checkUpdateIfNeeded() {
-        if (!Setting.getUpdate()) return;
-        long now = System.currentTimeMillis();
-        if (now - Setting.getLastUpdateCheck() < UPDATE_CHECK_INTERVAL) return;
-        Setting.putLastUpdateCheck(now);
-        Updater.create().start(this);
     }
 
     @Override
