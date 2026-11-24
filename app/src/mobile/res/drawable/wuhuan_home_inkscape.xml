@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="360dp"
+    android:height="800dp"
+    android:viewportWidth="360"
+    android:viewportHeight="800">
+
+    <!-- 仅作背景装饰：黛青山形与淡青蓝雾气，透明度保持克制 -->
+    <path
+        android:fillColor="#2E91AEB5"
+        android:pathData="M0,468 C48,430 82,446 124,420 C166,394 205,421 242,397 C287,368 326,390 360,362 L360,800 L0,800 Z" />
+    <path
+        android:fillColor="#1A82998E"
+        android:pathData="M0,548 C46,514 76,526 116,490 C158,452 194,485 232,458 C278,425 320,450 360,424 L360,800 L0,800 Z" />
+    <path
+        android:fillColor="#14738B7E"
+        android:pathData="M0,625 C50,590 90,607 132,574 C177,538 218,574 260,546 C303,518 334,534 360,516 L360,800 L0,800 Z" />
+
+    <!-- 右上竹枝：细线、疏叶，不进入内容卡片的可读区域 -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#1A587B6C"
+        android:strokeWidth="1.3"
+        android:strokeLineCap="round"
+        android:pathData="M332,0 C322,82 334,146 316,220 C308,252 300,276 286,306" />
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#1A587B6C"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:pathData="M326,66 C305,53 292,40 280,22 M326,66 C342,48 350,33 356,15 M322,112 C301,99 286,87 273,70 M322,112 C341,95 351,80 359,62 M313,170 C294,158 281,145 269,128 M313,170 C333,153 346,139 356,120 M303,232 C285,222 271,210 258,194 M303,232 C324,216 338,201 349,184" />
+    <path
+        android:fillColor="#1A789787"
+        android:pathData="M280,22 C292,24 307,39 326,66 C306,61 291,46 280,22 Z M356,15 C354,34 342,51 326,66 C333,43 344,27 356,15 Z M273,70 C289,75 306,91 322,112 C300,106 284,91 273,70 Z M359,62 C354,82 341,99 322,112 C333,89 346,73 359,62 Z M269,128 C285,134 301,149 313,170 C293,162 278,147 269,128 Z M356,120 C350,141 334,157 313,170 C327,146 342,130 356,120 Z" />
+
+    <!-- 左下荷叶意象：以弧线和叶脉提示，不绘制具象花朵 -->
+    <path
+        android:fillColor="#147D9A8B"
+        android:pathData="M0,716 C31,686 74,683 111,702 C81,738 37,752 0,746 Z" />
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#1A638777"
+        android:strokeWidth="1"
+        android:strokeLineCap="round"
+        android:pathData="M5,731 C38,720 70,714 103,706 M42,722 C32,710 24,700 19,689 M65,716 C63,702 62,692 63,681 M82,711 C91,700 99,693 109,687" />
+    <path
+        android:fillColor="#147D9A8B"
+        android:pathData="M0,770 C36,738 83,740 126,762 C91,792 42,803 0,790 Z" />
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#1A638777"
+        android:strokeWidth="1"
+        android:pathData="M8,779 C46,769 80,764 117,764 M47,771 L28,750 M72,766 L72,746 M91,764 L111,746" />
+</vector>
