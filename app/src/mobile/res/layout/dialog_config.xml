@@ -7,15 +7,18 @@
     android:paddingStart="24dp"
     android:paddingTop="16dp"
     android:paddingEnd="24dp">
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/input"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:hint="@string/dialog_config_name"
+        app:boxBackgroundColor="@color/wuhuan_surface_muted"
+        app:boxBackgroundMode="filled"
+        app:boxStrokeColor="@color/selector_input_stroke"
+        app:hintTextColor="@color/wuhuan_ink_muted"
         android:visibility="gone">
-
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/name"
             android:layout_width="match_parent"
@@ -24,18 +27,23 @@
             android:importantForAutofill="no"
             android:inputType="text"
             android:maxLength="10"
-            android:singleLine="true" />
-
+            android:singleLine="true"
+            android:textColor="@color/wuhuan_ink"
+            android:textColorHint="@color/wuhuan_ink_muted" />
     </com.google.android.material.textfield.TextInputLayout>
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/choose"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/dialog_config_hint"
+        app:boxBackgroundColor="@color/wuhuan_surface_muted"
+        app:boxBackgroundMode="filled"
+        app:boxStrokeColor="@color/selector_input_stroke"
         app:endIconDrawable="@drawable/ic_action_choose"
-        app:endIconMode="custom">
-
+        app:endIconMode="custom"
+        app:endIconTint="@color/wuhuan_ink_muted"
+        app:hintTextColor="@color/wuhuan_ink_muted">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/url"
             android:layout_width="match_parent"
@@ -43,7 +51,8 @@
             android:imeOptions="actionDone"
             android:importantForAutofill="no"
             android:inputType="text"
-            android:singleLine="true" />
-
+            android:singleLine="true"
+            android:textColor="@color/wuhuan_ink"
+            android:textColorHint="@color/wuhuan_ink_muted" />
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.appcompat.widget.LinearLayoutCompat>

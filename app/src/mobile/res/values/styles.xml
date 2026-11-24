@@ -1,5 +1,4 @@
 <resources>
-
     <style name="Theme.Base" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:statusBarColor">@color/transparent</item>
         <item name="android:navigationBarColor">@color/transparent</item>
@@ -9,24 +8,33 @@
         <item name="android:windowLightNavigationBar">true</item>
         <item name="colorPrimary">@color/wuhuan_accent</item>
         <item name="colorOnPrimary">@color/wuhuan_ink</item>
+        <item name="colorPrimaryContainer">@color/wuhuan_surface_muted</item>
+        <item name="colorOnPrimaryContainer">@color/wuhuan_ink</item>
+        <item name="colorSecondary">@color/wuhuan_accent</item>
+        <item name="colorOnSecondary">@color/wuhuan_ink</item>
+        <item name="colorSecondaryContainer">@color/wuhuan_surface_muted</item>
+        <item name="colorOnSecondaryContainer">@color/wuhuan_ink</item>
+        <item name="colorTertiary">@color/wuhuan_accent</item>
+        <item name="colorOnTertiary">@color/wuhuan_ink</item>
         <item name="colorSurface">@color/wuhuan_surface</item>
         <item name="colorSurfaceVariant">@color/wuhuan_surface_muted</item>
         <item name="colorOnSurface">@color/wuhuan_ink</item>
+        <item name="colorOnSurfaceVariant">@color/wuhuan_ink_muted</item>
+        <item name="colorOutline">@color/wuhuan_outline</item>
+        <item name="colorOutlineVariant">@color/outline_variant</item>
+        <item name="colorError">#A65E58</item>
+        <item name="colorOnError">#FFFFFF</item>
         <item name="android:textColorPrimary">@color/wuhuan_ink</item>
     </style>
-
     <style name="Theme.Splash" parent="Theme.SplashScreen">
         <item name="postSplashScreenTheme">@style/Theme.App</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
     </style>
-
     <style name="Theme.App" parent="Theme.Base" />
-
     <style name="Theme.Crash" parent="Theme.Base">
         <item name="android:windowDisablePreview">true</item>
         <item name="android:windowBackground">@color/bg</item>
     </style>
-
     <style name="Control">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -35,11 +43,9 @@
         <item name="android:textSize">14sp</item>
         <item name="android:padding">8dp</item>
     </style>
-
     <style name="ToolbarTextAppearance" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/wuhuan_ink</item>
         <item name="titleTextColor">@color/wuhuan_ink</item>
     </style>
-
 </resources>
