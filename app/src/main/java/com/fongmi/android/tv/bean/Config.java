@@ -93,12 +93,16 @@ public class Config {
     public static Config vod() {
         Config item = AppDatabase.get().getConfigDao().findOne(0);
 
-        // 内置多线路入口：chenlong.jpg 实际为 urls[] depot。
+        // 首次安装使用应用内置测试配置。若早期版本已创建空点播 Config，
+        // 则原位补齐 URL，避免旧安装升级后仍停留在空白首页。
         if (item == null) {
             return create(0, BuiltinDepot.URL, BuiltinDepot.NAME);
         }
+        if (item.isEmpty() && !TextUtils.isEmpty(BuiltinDepot.URL)) {
+            return item.url(BuiltinDepot.URL).name(BuiltinDepot.NAME).update();
+        }
 
-        // 覆盖安装时保留数据库，同时补齐 depot 中的关联 Config 与 yyy 聚合配置。
+        // 覆盖安装时保留用户现有配置及其本地选择。
         BuiltinDepot.ensure();
         return item;
     }
