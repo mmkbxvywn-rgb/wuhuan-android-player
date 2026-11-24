@@ -1,36 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
 
-    <!-- 渐变蓝播放三角（安全区内） -->
+    <!-- A restrained pair of orchid-like leaves, drawn as a single quiet mark. -->
     <path
-        android:pathData="M38,34 L76,54 L38,74 Z">
-        <aapt:attr name="android:fillColor">
-            <gradient
-                android:startColor="#4FC3F7"
-                android:endColor="#1F5CC8"
-                android:startX="38"
-                android:endX="76"
-                android:startY="34"
-                android:endY="74"
-                android:type="linear" />
-        </aapt:attr>
-    </path>
-
-    <!-- 金色四角星（安全区内，右上方） -->
+        android:fillColor="#78998B"
+        android:pathData="M53,80 C49,64 38,49 25,40 C42,40 55,52 59,68 C58,73 56,77 53,80 Z" />
     <path
-        android:fillColor="#FFD36B"
-        android:pathData="M75,30 L77.5,35.5 L82,37.5 L77.5,39.5 L75,45 L72.5,39.5 L68,37.5 L72.5,35.5 Z" />
-
-    <!-- 星点（安全区内） -->
+        android:fillColor="#A7BFAF"
+        android:pathData="M55,80 C56,61 67,42 84,30 C84,51 73,69 55,80 Z" />
     <path
-        android:fillColor="#66FFFFFF"
-        android:pathData="M32,68 a2.6,2.6 0 1 0 5.2,0 a2.6,2.6 0 1 0 -5.2,0" />
+        android:fillColor="#D0DDD2"
+        android:pathData="M55,78 C56,62 63,49 74,39 C69,55 62,68 55,78 Z" />
     <path
-        android:fillColor="#66FFFFFF"
-        android:pathData="M30,36 a2,2 0 1 0 4,0 a2,2 0 1 0 -4,0" />
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#557B6D"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M54,81 C56,66 54,53 47,43" />
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#557B6D"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M54,81 C61,65 69,52 80,42" />
+    <path
+        android:fillColor="#B9786A"
+        android:pathData="M78,78 a2.1,2.1 0 1 0 4.2,0 a2.1,2.1 0 1 0 -4.2,0" />
 </vector>
