@@ -73,7 +73,7 @@ public class HistoryFragment extends BaseFragment implements HistoryAdapter.OnCl
     @Override
     protected void initView() {
         EventBus.getDefault().register(this);
-        mTheme = VodTheme.glass();
+        mTheme = VodTheme.light();
         setRecyclerView();
         applyTheme();
         setTab(false);
