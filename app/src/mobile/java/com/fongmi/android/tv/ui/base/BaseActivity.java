@@ -106,7 +106,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     private void enableEdgeToEdge() {
         try {
-            EdgeToEdge.enable(this, SystemBarStyle.dark(Color.TRANSPARENT), SystemBarStyle.dark(Color.TRANSPARENT));
+            EdgeToEdge.enable(this, SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT), SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT));
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 getWindow().setStatusBarContrastEnforced(false);
                 getWindow().setNavigationBarContrastEnforced(false);
