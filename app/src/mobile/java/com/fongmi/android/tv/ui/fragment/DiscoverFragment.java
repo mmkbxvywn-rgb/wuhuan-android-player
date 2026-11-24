@@ -213,6 +213,7 @@ public class DiscoverFragment extends Fragment {
         EventBus.getDefault().unregister(this);
         if (mExecutor != null) mExecutor.shutdownNow();
         mLoading = false;
+        mHeroVod = null;
         mBinding = null;
     }
 }
