@@ -51,4 +51,25 @@
         android:strokeColor="#1A638777"
         android:strokeWidth="1"
         android:pathData="M8,779 C46,769 80,764 117,764 M47,771 L28,750 M72,766 L72,746 M91,764 L111,746" />
+
+    <!-- 右下兰花：疏枝、五瓣花与修长兰叶，控制在低饱和浅黛色，不压过内容 -->
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#1A587B6C"
+        android:strokeWidth="1.2"
+        android:strokeLineCap="round"
+        android:pathData="M292,730 C302,684 293,650 278,620 C268,600 262,583 263,565 M292,730 C310,692 321,666 326,632 M287,695 C266,678 251,658 245,638 M300,678 C321,665 335,646 342,624" />
+    <path
+        android:fillColor="#1A789787"
+        android:pathData="M263,565 C244,551 237,534 245,526 C258,524 267,542 263,565 Z M263,565 C259,542 269,524 281,526 C289,537 277,555 263,565 Z M263,565 C280,550 298,550 302,562 C300,575 280,575 263,565 Z M263,565 C250,579 232,581 226,570 C226,557 246,554 263,565 Z M263,565 C251,547 255,529 267,526 C279,533 273,552 263,565 Z" />
+    <path
+        android:fillColor="@android:color/transparent"
+        android:strokeColor="#26738B7E"
+        android:strokeWidth="0.9"
+        android:strokeLineCap="round"
+        android:pathData="M263,565 C260,550 261,539 267,526 M263,565 C250,560 241,558 232,562 M263,565 C277,560 289,558 299,562" />
+    <path
+        android:fillColor="#267D9A8B"
+        android:pathData="M278,620 C254,608 239,592 239,578 C258,579 273,594 278,620 Z M284,644 C307,615 329,605 344,610 C334,632 312,644 284,644 Z M292,678 C269,665 253,650 252,637 C272,641 288,654 292,678 Z M301,685 C313,661 330,647 345,649 C337,669 321,681 301,685 Z" />
+
 </vector>

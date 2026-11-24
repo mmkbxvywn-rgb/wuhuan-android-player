@@ -136,9 +136,9 @@ public class Setting {
         Prefers.put("sync_mode", Math.clamp(mode, MIN_SYNC_MODE, MAX_SYNC_MODE));
     }
 
-    /** 首页样式开关：开=豆瓣精选推荐页，关=普通点播分类网格（第 0 个 tab 内容切换）；默认关，升级后保持原有分类首页 */
+    /** 首页样式开关：开=豆瓣精选推荐页，关=普通点播分类网格（第 0 个 tab 内容切换）；默认开启，用户主动关闭后保留其选择。 */
     public static boolean isHomeDiscover() {
-        return Prefers.getBoolean("home_discover", false);
+        return Prefers.getBoolean("home_discover", true);
     }
 
     public static void putHomeDiscover(boolean value) {
