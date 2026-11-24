@@ -6,12 +6,12 @@
         android:bottomLeftRadius="8dp"
         android:bottomRightRadius="8dp" />
 
-    <solid android:color="@color/black_20" />
+    <solid android:color="@color/wuhuan_surface_muted" />
 
     <padding
-        android:bottom="6dp"
+        android:bottom="7dp"
         android:left="6dp"
         android:right="6dp"
-        android:top="6dp" />
+        android:top="7dp" />
 
 </shape>
