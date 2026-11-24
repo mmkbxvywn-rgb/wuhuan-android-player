@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="marquee"
                 android:singleLine="true"
-                android:textColor="@color/white"
+                android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:visibility="invisible"
                 tools:text="慶餘年第一季：第一集" />
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:fontFeatureSettings="tnum"
                 android:singleLine="true"
-                android:textColor="@color/white"
+                android:textColor="@android:color/white"
                 android:textSize="12sp"
                 android:visibility="gone"
                 tools:text="1920x1080"
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFeatureSettings="tnum"
-                android:textColor="@color/white"
+                android:textColor="@android:color/white"
                 android:textSize="12sp"
                 tools:text="1.2 MB/s" />
 
