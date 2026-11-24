@@ -1,0 +1,26 @@
+{
+  "sites": [
+    {
+      "key": "wuhuan_public_cms_test",
+      "name": "公开 CMS 测试源",
+      "type": 1,
+      "api": "https://suoniapi.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "changeable": 1,
+      "categories": [
+        "电影",
+        "电视剧",
+        "综艺",
+        "动漫",
+        "纪录片",
+        "演唱会",
+        "体育赛事",
+        "4K电影",
+        "有声动漫",
+        "科普学习",
+        "儿童儿歌"
+      ]
+    }
+  ]
+}
