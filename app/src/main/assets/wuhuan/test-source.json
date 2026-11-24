@@ -1,26 +1,20 @@
 {
-  "sites": [
+  "urls": [
     {
-      "key": "wuhuan_public_cms_test",
-      "name": "公开 CMS 测试源",
-      "type": 1,
-      "api": "https://suoniapi.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "changeable": 1,
-      "categories": [
-        "电影",
-        "电视剧",
-        "综艺",
-        "动漫",
-        "纪录片",
-        "演唱会",
-        "体育赛事",
-        "4K电影",
-        "有声动漫",
-        "科普学习",
-        "儿童儿歌"
-      ]
+      "name": "肥猫（社区维护快照）",
+      "url": "https://raw.githubusercontent.com/JianghaoPi/my-tvbox-sources/main/output/feimao.json"
+    },
+    {
+      "name": "饭太硬（社区维护快照）",
+      "url": "https://raw.githubusercontent.com/JianghaoPi/my-tvbox-sources/main/output/fantaiying.json"
+    },
+    {
+      "name": "王二小（社区维护快照）",
+      "url": "https://raw.githubusercontent.com/JianghaoPi/my-tvbox-sources/main/output/wangerxiao.json"
+    },
+    {
+      "name": "小米（社区维护快照）",
+      "url": "https://raw.githubusercontent.com/JianghaoPi/my-tvbox-sources/main/output/xiaomi.json"
     }
   ]
 }
