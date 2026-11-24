@@ -71,6 +71,8 @@
 
 关键风险：`Site.objectFrom()` 捕获异常后返回空 Site；坏站点可能被静默转成空对象。需要在资源导入诊断中统计被跳过/解析失败的条目，而不是只展示“导入成功”。
 
+`SiteApi` 进一步确认：`type=3` 走 Spider；`type=4` 走带 Base64 ext 参数的 HTTP API；其他类型走直接 HTTP 请求。分类首页会按 `Site.categories` 白名单过滤分类；但 `searchContent()` 当前没有应用该白名单，因此不能把 categories 误认为搜索结果的内容过滤器。
+
 ## 4. Spider 运行时分派
 
 源码位置：
@@ -122,8 +124,8 @@ Live 来源模型及频道字段还需继续审计，包括 TXT/M3U/JSON、分�
 - Config 使用 Room 数据库持久化，唯一索引为 `url + type`。
 - `Config.vod()` 从数据库读取点播配置；数据库无记录时会用 `BuiltinDepot.URL/NAME` 创建默认配置。
 - `VodConfig.checkJson()` 发现顶层 `urls` 时进入 depot 分支，解析 Depot 列表并加载其中第一条配置。
-- 当前 `BuiltinDepot.URL` 为 null、`NAME` 为空、`EXTRA_YL_URL` 为空字符串；但 BuiltinDepot 仍尝试读取 assets 中的 `clys/chenlong.jpg`。
-- `BuiltinDepot.getConfigs()` 会从该 assets 文件的 `urls[]` 建立关联 Config；空 URL 会被跳过。
+- 审计起点时 `BuiltinDepot.URL/NAME` 为空，且代码尝试读取的 `assets/clys/chenlong.jpg` 不存在于当前分支文件树；这条旧多仓初始化路径因此没有可用的内置数据。
+- 本轮已将首次安装入口改为 `assets://wuhuan/test-source.json`，并新增一个公开 CMS 测试源配置；旧 `getConfigs()` 多仓逻辑尚未重构，仍需单独处理。
 - `Config.update()` 会更新时间并保存当前 URL 到偏好设置；Config 还保存用户选择的 home site 和 parse 名称。
 
 重要待核验点：
@@ -131,6 +133,7 @@ Live 来源模型及频道字段还需继续审计，包括 TXT/M3U/JSON、分�
 2. BuiltinDepot 对 assets 文件读取异常采用静默捕获；需要确认文件真实内容及首次安装行为。
 3. 首次内置测试源必须避免覆盖用户已有 Config，且仅在首次初始化时安装；用户删除后不应每次启动又自动恢复。
 4. 更新配置时必须保留用户本地的 home、parse、searchable、changeable 等自定义状态。
+5. 当前首次安装测试源使用应用内 assets JSON 作为配置文件，再由该文件引用远程 CMS API；配置文件本身不捆绑影视内容或 Spider 代码。
 
 ## 8. 配置解码与 URL 转换
 
@@ -155,7 +158,20 @@ Decoder.getJson() 通过 OkHttp 下载配置后执行 verify/fix：
 
 FongMi 配置文档列出了 Site type 0/1/3/4、解析器类型、Live 字段以及共享网络配置对象。本文只把它作为生态规范参考，不把其他分支文档直接当成本分支的运行事实。
 
-## 10. 下一步审计与验证任务
+## 10. 首次安装测试源（本轮新增，待真机验证）
+
+配置文件：`app/src/main/assets/wuhuan/test-source.json`  
+入口常量：`BuiltinDepot.URL = assets://wuhuan/test-source.json`  
+默认名称：`无患影音测试源`  
+CMS API：`https://suoniapi.com/api.php/provide/vod/`
+
+验证记录：2026-11-24 直接访问 `?ac=list` 返回 JSON，`code=1`，包含分页列表和分类数组；因此确认 API 当前能响应标准 CMS 列表请求。尚未通过本应用验证分类、搜索、详情、播放链路。
+
+测试配置通过 `categories` 白名单只展示常见电影、电视剧、综艺、动漫、纪录片、演唱会、体育、科普和儿童内容类别。该第三方 API 的原始分类表还包含成人向类别；由于当前搜索调用没有按 categories 白名单过滤，测试阶段应避免使用成人类别关键词。该接口只是临时测试依赖，不代表内容授权、服务稳定性或正式发布推荐；若无法确认适用性，正式发布前应替换或移除。
+
+`Config.vod()` 现已处理两种情况：新安装时创建该内置配置；早期版本已留下空 URL 点播 Config 时，原位补齐测试配置 URL。已有非空用户配置保持不变。用户主动删除后，当前逻辑不会在每次启动时重新创建默认源。
+
+## 11. 下一步审计与验证任务
 
 - [ ] 核查 assets/clys/chenlong.jpg 的实际内容、调用入口和多仓 UI。
 - [ ] 逐项核查 Parse type 0–4 在本分支的执行实现。
