@@ -97,12 +97,7 @@
     <string name="log_copied">Log copied</string>
 
     <string name="setting_wall_auto">Daily auto</string>
-    <string-array name="select_wall">
-        <item>Morning Gold</item>
-        <item>Mist Blue</item>
-        <item>Lake Green</item>
-        <item>Twilight Violet</item>
-    </string-array>
+    <string-array name="select_wall" />
     <string name="setting_auto_play">Auto-play on open</string>
     <string name="play_deferred">Play</string>
     <string name="play_deferred_continue">Resume</string>
