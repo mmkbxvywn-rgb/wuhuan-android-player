@@ -22,6 +22,8 @@ import java.util.List;
 @Entity(indices = @Index(value = {"url", "type"}, unique = true))
 public class Config {
 
+    private static final String KEY_TEST_SOURCE_INITIALIZED = "wuhuan_test_source_initialized";
+
     @PrimaryKey(autoGenerate = true)
     @SerializedName("id")
     private int id;
@@ -92,17 +94,28 @@ public class Config {
 
     public static Config vod() {
         Config item = AppDatabase.get().getConfigDao().findOne(0);
+        boolean initialized = Prefers.getBoolean(KEY_TEST_SOURCE_INITIALIZED);
 
-        // 首次安装使用应用内置测试配置。若早期版本已创建空点播 Config，
-        // 则原位补齐 URL，避免旧安装升级后仍停留在空白首页。
+        // 只在首次初始化时添加测试源。用户之后主动删除，不会在下次启动时复活。
         if (item == null) {
-            return create(0, BuiltinDepot.URL, BuiltinDepot.NAME);
-        }
-        if (item.isEmpty() && !TextUtils.isEmpty(BuiltinDepot.URL)) {
-            return item.url(BuiltinDepot.URL).name(BuiltinDepot.NAME).update();
+            if (!initialized) {
+                Prefers.put(KEY_TEST_SOURCE_INITIALIZED, true);
+                return create(0, BuiltinDepot.URL, BuiltinDepot.NAME);
+            }
+            return create(0);
         }
 
-        // 覆盖安装时保留用户现有配置及其本地选择。
+        // 早期版本已留下空 URL Config 时，只迁移一次；若标记已存在则尊重用户删除。
+        if (item.isEmpty()) {
+            if (!initialized && !TextUtils.isEmpty(BuiltinDepot.URL)) {
+                Prefers.put(KEY_TEST_SOURCE_INITIALIZED, true);
+                return item.url(BuiltinDepot.URL).name(BuiltinDepot.NAME).update();
+            }
+            return item;
+        }
+
+        // 已存在非空用户配置时标记初始化完成，之后不再自动补入默认测试源。
+        if (!initialized) Prefers.put(KEY_TEST_SOURCE_INITIALIZED, true);
         BuiltinDepot.ensure();
         return item;
     }
