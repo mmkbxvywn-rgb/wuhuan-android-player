@@ -88,12 +88,7 @@
     <string name="log_copied">日志已复制</string>
 
     <string name="setting_wall_auto">每日自动更换</string>
-    <string-array name="select_wall">
-        <item>晨光金</item>
-        <item>雾光蓝</item>
-        <item>湖光青</item>
-        <item>暮光紫</item>
-    </string-array>
+    <string-array name="select_wall" />
     <string name="setting_auto_play">进入即播放</string>
     <string name="play_deferred">播放</string>
     <string name="play_deferred_continue">继续播放</string>
