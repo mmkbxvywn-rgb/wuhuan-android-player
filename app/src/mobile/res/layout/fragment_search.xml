@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/wuhuan_bg">
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -28,6 +29,7 @@
             android:textCursorDrawable="@drawable/shape_cursor" />
     </com.google.android.material.appbar.MaterialToolbar>
     <androidx.core.widget.NestedScrollView
+        android:background="@color/wuhuan_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
