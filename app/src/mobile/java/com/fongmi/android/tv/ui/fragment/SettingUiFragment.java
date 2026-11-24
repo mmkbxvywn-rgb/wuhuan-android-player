@@ -53,6 +53,12 @@ public class SettingUiFragment extends BaseFragment implements ConfigListener {
     @Override
     protected void initView() {
         walls = ResUtil.getStringArray(R.array.select_wall);
+        // 旧版本保存的内置壁纸已下线，清除失效索引，避免继续显示低对比度背景。
+        if (walls.length == 0 && Setting.getWall() > 0) {
+            Setting.putWall(0);
+            Setting.putWallType(0);
+            ConfigEvent.wall();
+        }
         mBinding.autoPlayText.setText(Setting.getSwitch(PlayerSetting.isAutoPlay()));
         mBinding.homeDiscoverText.setText(Setting.getSwitch(Setting.isHomeDiscover()));
         mBinding.homeContinueText.setText(Setting.getSwitch(Setting.isHomeContinue()));
@@ -89,9 +95,11 @@ public class SettingUiFragment extends BaseFragment implements ConfigListener {
             mBinding.wallText.setText(R.string.setting_wall_auto);
         } else if (Setting.getWall() <= 0) {
             mBinding.wallText.setText(R.string.wall_custom);
-        } else {
-            int index = Math.max(0, Math.min(Setting.getWall() - 1, walls.length - 1));
+        } else if (Setting.getWall() > 0 && walls.length > 0) {
+            int index = Math.min(Setting.getWall() - 1, walls.length - 1);
             mBinding.wallText.setText(walls[index]);
+        } else {
+            mBinding.wallText.setText(R.string.wall_custom);
         }
     }
 
@@ -103,7 +111,7 @@ public class SettingUiFragment extends BaseFragment implements ConfigListener {
         items.add(getString(R.string.wall_local));
         items.add(getString(R.string.wall_remote));
         int autoIndex = walls.length;
-        int checked = Setting.isWallAuto() ? autoIndex : (Setting.getWall() > 0 ? Math.min(Setting.getWall() - 1, walls.length - 1) : -1);
+        int checked = Setting.isWallAuto() ? autoIndex : (Setting.getWall() > 0 && walls.length > 0 ? Math.min(Setting.getWall() - 1, walls.length - 1) : -1);
         new GlassAlertDialogBuilder(requireActivity())
                 .setTitle(R.string.setting_wall)
                 .setNegativeButton(R.string.dialog_negative, null)
