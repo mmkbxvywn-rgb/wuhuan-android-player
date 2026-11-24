@@ -1,0 +1,38 @@
+<resources>
+    <!-- 无患影音手机端：月白、青灰、淡青绿。只覆盖 mobile source set，不改变后续 TV 视觉。 -->
+    <color name="white">#293730</color>
+    <color name="white_05">#0D293730</color>
+    <color name="white_10">#1A293730</color>
+    <color name="white_15">#26293730</color>
+    <color name="white_20">#33293730</color>
+    <color name="white_30">#4D293730</color>
+    <color name="white_40">#66293730</color>
+    <color name="white_50">#80293730</color>
+    <color name="white_60">#99293730</color>
+    <color name="white_70">#B3293730</color>
+    <color name="white_80">#CC293730</color>
+    <color name="white_90">#E6293730</color>
+
+    <color name="bg">#F5F7F3</color>
+    <color name="bg_dark">#EEF2ED</color>
+    <color name="primary">#6F9585</color>
+    <color name="accent">#6F9585</color>
+    <color name="surface">#FBFCF9</color>
+    <color name="surface_high">#EEF2ED</color>
+    <color name="outline">#263D5147</color>
+    <color name="outline_variant">#1A3D5147</color>
+    <color name="on_surface">#293730</color>
+    <color name="on_surface_variant">#718078</color>
+    <color name="sheet_bg">#F5F7F3</color>
+    <color name="glass_bg">#F5F7F3</color>
+    <color name="glass_hairline">#33808F83</color>
+    <color name="glass_stroke">#22808F83</color>
+
+    <color name="wuhuan_bg">#F5F7F3</color>
+    <color name="wuhuan_surface">#FBFCF9</color>
+    <color name="wuhuan_surface_muted">#EEF2ED</color>
+    <color name="wuhuan_ink">#293730</color>
+    <color name="wuhuan_ink_muted">#718078</color>
+    <color name="wuhuan_accent">#6F9585</color>
+    <color name="wuhuan_outline">#263D5147</color>
+</resources>
