@@ -32,15 +32,13 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * 内置精选首页：豆瓣榜单数据，不依赖用户配置的源
- * 参照同类播放器首页布局：多个榜单横滑 + 更多跳转
+ * 内置精选首页：豆瓣榜单数据，不依赖用户配置的源。
+ * 网络推荐不可用时明确显示空状态，不再静默留下一整页空白。
  */
 public class DiscoverFragment extends Fragment {
 
@@ -49,7 +47,7 @@ public class DiscoverFragment extends Fragment {
     private ExecutorService mExecutor;
     private boolean mLoading;
 
-    // 榜单配置：显示名 -> 豆瓣 collection_id
+    // 榜单配置：显示名 -> collection_id
     private static final List<String[]> RANKS = Arrays.asList(
             new String[]{"豆瓣推荐", "movie_weekly_best"},
             new String[]{"电视榜", "tv_hot"},
@@ -85,14 +83,14 @@ public class DiscoverFragment extends Fragment {
         mBinding.continueRecycler.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         mBinding.continueMore.setOnClickListener(v -> HistoryActivity.start(requireActivity()));
         mBinding.emptyText.setOnClickListener(v -> {
-            mBinding.emptyText.setVisibility(View.GONE);
+            if (mLoading) return;
+            mRecommendAdapter.clear();
             loadRanks();
         });
 
         mRecommendAdapter = new RecommendRowAdapter(new RecommendRowAdapter.OnClickListener() {
             @Override
             public void onItemClick(Vod item) {
-                // 豆瓣榜单没有源vodId，用片名搜索当前源
                 SearchActivity.start(requireActivity(), item.getName());
             }
 
@@ -128,45 +126,67 @@ public class DiscoverFragment extends Fragment {
         mBinding.continueRecycler.setItemAnimator(null);
         int count = Math.min(items.size(), 10);
         mBinding.continueRecycler.setAdapter(new ContinueAdapter(items.subList(0, count), item ->
-            VideoActivity.start(requireActivity(), item.getSiteKey(), item.getVodId(), item.getVodName(), item.getVodPic())
+                VideoActivity.start(requireActivity(), item.getSiteKey(), item.getVodId(), item.getVodName(), item.getVodPic())
         ));
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        // 从播放页/历史页返回时刷新"最近观看"，避免停留在旧的空状态。
         if (mBinding != null) setContinue();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onRefreshEvent(RefreshEvent event) {
-        // 清空历史是异步落库的，靠 onResume 会读到旧数据，只能等事件。
-        if (event.getType() == RefreshEvent.Type.HISTORY && mBinding != null) setContinue();
-        if (event.getType() == RefreshEvent.Type.SETTING && mBinding != null) setContinue();
+        if ((event.getType() == RefreshEvent.Type.HISTORY || event.getType() == RefreshEvent.Type.SETTING) && mBinding != null) {
+            setContinue();
+        }
     }
 
     private void loadRanks() {
-        if (mLoading) return;
+        if (mLoading || mBinding == null) return;
         mLoading = true;
-        mExecutor = Executors.newFixedThreadPool(RANKS.size());
+        mBinding.loading.setVisibility(View.VISIBLE);
+        mBinding.emptyText.setVisibility(View.GONE);
+
+        ExecutorService executor = Executors.newFixedThreadPool(RANKS.size());
+        mExecutor = executor;
+        AtomicInteger completed = new AtomicInteger();
+
         for (int i = 0; i < RANKS.size(); i++) {
             final int index = i;
             final String collectionId = RANKS.get(i)[1];
-            mExecutor.submit(() -> {
+            executor.submit(() -> {
                 try {
                     List<Vod> list = Douban.getRank(collectionId, 12);
                     if (list != null && !list.isEmpty()) {
                         App.post(() -> {
-                            if (mBinding == null || mRecommendAdapter == null) return;
-                            mRecommendAdapter.addRow(RANKS.get(index)[0], new ArrayList<>(list), index);
+                            if (mBinding != null && mRecommendAdapter != null) {
+                                mRecommendAdapter.addRow(RANKS.get(index)[0], new ArrayList<>(list), index);
+                                mBinding.emptyText.setVisibility(View.GONE);
+                            }
                         });
                     }
                 } catch (Exception ignored) {
+                    // 单个榜单失败不影响其它榜单；全部失败时由统一空状态解释。
+                } finally {
+                    if (completed.incrementAndGet() == RANKS.size()) {
+                        App.post(() -> {
+                            if (mBinding == null) return;
+                            mLoading = false;
+                            mBinding.loading.setVisibility(View.GONE);
+                            if (mRecommendAdapter.getItemCount() == 0) {
+                                mBinding.emptyText.setText("精选内容暂时无法连接\n点击此处重试，也可切换上方分类浏览片源");
+                                mBinding.emptyText.setVisibility(View.VISIBLE);
+                            } else {
+                                mBinding.emptyText.setVisibility(View.GONE);
+                            }
+                        });
+                    }
                 }
             });
         }
-        mExecutor.shutdown();
+        executor.shutdown();
     }
 
     @Override
@@ -174,6 +194,7 @@ public class DiscoverFragment extends Fragment {
         super.onDestroyView();
         EventBus.getDefault().unregister(this);
         if (mExecutor != null) mExecutor.shutdownNow();
+        mLoading = false;
         mBinding = null;
     }
 }
