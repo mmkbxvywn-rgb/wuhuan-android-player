@@ -128,3 +128,20 @@
 
 - 源码修改已提交，等待本批 GitHub Actions 构建。
 - 必须安装本批最新构建再次核验状态栏、应用名、首页兰叶图标和设置列表表面；本次截图对应的上一版不能证明这些修正已生效。
+
+
+## 2026-11-24：配置体系源码审计第一版
+
+### 已完成
+
+- 新增 `docs/CONFIG_AUDIT.md`，记录 Vod 顶层字段、Site 字段及默认值、Spider 分派、解析器模型、Live 配置、多仓/持久化、配置解码与 URL 转换的第一轮源码审计。
+- 审计依据为当前工作分支源码：`VodConfig`、`BaseConfig`、`Site`、`Config`、`LiveConfig`、`Decoder`、`BaseLoader`、`JarLoader`、`JsLoader`、`PyLoader`、`UrlUtil`、`Depot`。
+- 对照 FongMi-TV 公开配置文档和 CatVod Spider 示例文档，明确生态文档用于解释协议约定，实际能力仍以本分支代码为准。
+- 记录重要风险：站点反序列化异常可能被静默转为空 Site；Spider 加载会执行外部代码；Depot 入口与当前 BuiltinDepot 常量配置尚未接通；不同分支的 type 说明不能替代本分支运行时验证。
+
+### 尚未完成
+
+- 本次只完成静态审计第一版，尚未完成 Live/Channel/EPG、解析器 type 0–4、网络规则调用链、配置格式转换和全部设置项的深度审计。
+- 尚未选定并验证内置测试资源接口，尚未改动默认资源初始化逻辑。
+- 尚未完成配置导入与 CMS 搜索/详情/播放的真机验证。
+- `docs/CONFIG_AUDIT.md` 第 10 节列出后续审计与验证清单；未勾选项均不得视为完成。
