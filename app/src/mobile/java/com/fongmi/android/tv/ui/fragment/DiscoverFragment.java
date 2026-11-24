@@ -23,6 +23,7 @@ import com.fongmi.android.tv.ui.activity.VideoActivity;
 import com.fongmi.android.tv.ui.adapter.ContinueAdapter;
 import com.fongmi.android.tv.ui.adapter.RecommendRowAdapter;
 import com.fongmi.android.tv.utils.Douban;
+import com.fongmi.android.tv.utils.ImgUtil;
 import com.fongmi.android.tv.utils.NavBarScroll;
 
 import org.greenrobot.eventbus.EventBus;
@@ -46,6 +47,7 @@ public class DiscoverFragment extends Fragment {
     private RecommendRowAdapter mRecommendAdapter;
     private ExecutorService mExecutor;
     private boolean mLoading;
+    private Vod mHeroVod;
 
     // 榜单配置：显示名 -> collection_id
     private static final List<String[]> RANKS = Arrays.asList(
@@ -82,6 +84,9 @@ public class DiscoverFragment extends Fragment {
     private void initView() {
         mBinding.continueRecycler.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         mBinding.continueMore.setOnClickListener(v -> HistoryActivity.start(requireActivity()));
+        mBinding.heroCard.setOnClickListener(v -> {
+            if (mHeroVod != null) SearchActivity.start(requireActivity(), mHeroVod.getName());
+        });
         mBinding.emptyText.setOnClickListener(v -> {
             if (mLoading) return;
             mRecommendAdapter.clear();
@@ -110,6 +115,18 @@ public class DiscoverFragment extends Fragment {
         mBinding.recommendRecycler.setHasFixedSize(true);
         mBinding.recommendRecycler.setItemAnimator(null);
         mBinding.recommendRecycler.setItemViewCacheSize(8);
+    }
+
+    private void setHero(Vod item) {
+        if (mBinding == null || item == null) return;
+        mHeroVod = item;
+        mBinding.heroTitle.setText(item.getName());
+        String subtitle = item.getYear();
+        if (item.getRemarks() != null && !item.getRemarks().isEmpty()) {
+            subtitle = subtitle == null || subtitle.isEmpty() ? item.getRemarks() : subtitle + " · " + item.getRemarks();
+        }
+        mBinding.heroSubtitle.setText(subtitle == null || subtitle.isEmpty() ? "点击搜索片名并选择可用片源" : subtitle);
+        ImgUtil.load(item.getName(), item.getPic(), mBinding.heroImage);
     }
 
     private void setContinue() {
