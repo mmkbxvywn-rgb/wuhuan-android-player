@@ -39,7 +39,6 @@ import com.fongmi.android.tv.service.PlaybackService;
 import com.fongmi.android.tv.setting.Setting;
 import com.fongmi.android.tv.ui.base.BaseActivity;
 import com.fongmi.android.tv.ui.custom.FragmentStateManager;
-import com.fongmi.android.tv.ui.custom.GlassDrawable;
 import com.fongmi.android.tv.ui.fragment.HistoryFragment;
 import com.fongmi.android.tv.ui.fragment.SettingAboutFragment;
 import com.fongmi.android.tv.ui.fragment.SettingDanmakuFragment;
@@ -70,7 +69,6 @@ public class HomeActivity extends BaseActivity {
 
     private FragmentStateManager mManager;
     private ActivityHomeBinding mBinding;
-    private GlassDrawable mGlass;
     private int orientation;
     private int mSelected = TAB_VOD;
     private boolean navHidden;
@@ -95,25 +93,12 @@ public class HomeActivity extends BaseActivity {
     @Override
     protected void initView(Bundle savedInstanceState) {
         orientation = getResources().getConfiguration().orientation;
-        mGlass = new GlassDrawable(mBinding.container);
-        mBinding.navBottom.setBackground(mGlass);
+        mBinding.navBottom.setBackgroundResource(R.drawable.wuhuan_nav_surface);
         bindTabs();
         setNavigation();
         PermissionUtil.requestNotify(this);
         initFragment(savedInstanceState);
         initConfig();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (mGlass != null) mGlass.setActive(true);
-    }
-
-    @Override
-    protected void onPause() {
-        if (mGlass != null) mGlass.setActive(false);
-        super.onPause();
     }
 
     private void bindTabs() {
@@ -302,10 +287,6 @@ public class HomeActivity extends BaseActivity {
         OkHttp.get().clear();
         Source.get().exit();
         Server.get().stop();
-        if (mGlass != null) {
-            mGlass.release();
-            mGlass = null;
-        }
         super.onDestroy();
     }
 }
