@@ -13,7 +13,9 @@ import java.util.List;
 
 public final class BuiltinDepot {
 
-    // 首次安装默认加载应用内的测试配置；测试配置只引用公开 CMS API，不捆绑媒体文件或 Spider 可执行代码。\n    public static final String URL = "assets://wuhuan/test-source.json";
+    // 首次安装默认加载应用内的测试配置；仅引用公开 CMS API，不捆绑媒体文件或 Spider 可执行代码。
+    public static final String URL = "assets://wuhuan/test-source.json";
+    public static final String NAME = "无患影音测试源";
     public static final String NAME = "无患影音测试源";
     public static final String EXTRA_YL_URL = "";
 
