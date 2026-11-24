@@ -15,10 +15,10 @@
         android:layout_weight="1"
         android:ellipsize="marquee"
         android:singleLine="true"
-        android:textColor="@color/selector_control"
+        android:textColor="@color/wuhuan_ink"
         android:textSize="14sp"
-        app:backgroundTint="@color/selector_button"
-        app:strokeColor="@color/selector_stroke"
+        app:backgroundTint="@color/wuhuan_surface_muted"
+        app:strokeColor="@color/wuhuan_outline"
         tools:text="泥巴" />
 
     <androidx.appcompat.widget.AppCompatImageView
