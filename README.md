@@ -59,6 +59,7 @@ app/build/outputs/apk/mobileArm64_v8a/release/
 - [源码基线审计](docs/BASELINE_AUDIT.md)
 - [UI 结构审计](docs/UI_BASELINE_AUDIT.md)
 - [配置体系审计](docs/CONFIG_AUDIT.md)
+- [手机端设置项审计](docs/SETTINGS_AUDIT.md)
 
 ## 致谢与来源
 
