@@ -38,7 +38,7 @@
         android:layout_marginTop="4dp"
         android:ellipsize="end"
         android:singleLine="true"
-        android:textColor="@color/white"
+        android:textColor="@color/wuhuan_ink"
         android:textSize="12sp" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:singleLine="true"
-        android:textColor="@color/white_50"
+        android:textColor="@color/wuhuan_ink_muted"
         android:textSize="12sp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
