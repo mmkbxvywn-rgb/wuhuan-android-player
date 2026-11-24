@@ -179,6 +179,7 @@ public class DiscoverFragment extends Fragment {
                     if (list != null && !list.isEmpty()) {
                         App.post(() -> {
                             if (mBinding != null && mRecommendAdapter != null) {
+                                if (mHeroVod == null) setHero(list.get(0));
                                 mRecommendAdapter.addRow(RANKS.get(index)[0], new ArrayList<>(list), index);
                                 mBinding.emptyText.setVisibility(View.GONE);
                             }
