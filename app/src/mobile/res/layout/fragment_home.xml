@@ -78,7 +78,7 @@
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:text="连接片源后，发现下一部想看的作品"
-                        android:textColor="@color/white_80"
+                        android:textColor="#CCFFFFFF"
                         android:textSize="12sp" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
