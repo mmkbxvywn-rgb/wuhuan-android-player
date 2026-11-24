@@ -53,6 +53,21 @@ public class VodTheme {
         return new VodTheme(true);
     }
 
+    /** 手机浅色记录页：月白卡片、青灰文字与低饱和青绿强调色。 */
+    public static VodTheme light() {
+        return new VodTheme();
+    }
+
+    private VodTheme() {
+        glass = true;
+        surface = Color.TRANSPARENT;
+        card = 0xFFFBFCF9;
+        onSurface = 0xFF293730;
+        onVariant = 0xFF718078;
+        accent = 0xFF6F9585;
+        onAccent = 0xFF14251D;
+    }
+
     /** 取海报色相，把饱和度和亮度拉满：深色/灰海报也能得到可用的强调色 */
     private static int vivid(int seed) {
         float[] hsv = new float[3];
