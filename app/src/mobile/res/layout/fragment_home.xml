@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@color/wuhuan_bg">
+    android:background="@drawable/wuhuan_home_inkscape">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
