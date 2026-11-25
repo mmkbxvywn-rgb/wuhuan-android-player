@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:color="@color/wuhuan_accent" android:state_selected="true" />
-    <item android:color="#99FFFFFF" android:state_enabled="false" />
-    <item android:color="@android:color/white" />
+    <item android:color="#527765" android:state_selected="true" />
+    <item android:color="#8A9990" android:state_enabled="false" />
+    <item android:color="#46564D" />
 </selector>
