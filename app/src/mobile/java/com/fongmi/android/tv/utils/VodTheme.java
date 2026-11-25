@@ -17,7 +17,7 @@ public class VodTheme {
     private static final int SURFACE = 0xFFF5F7F3;
     private static final int CARD = 0xFFFBFCF9;
     private static final int INK = 0xFF293730;
-    private static final int MUTED_INK = 0xFF718078;
+    private static final int MUTED_INK = 0xFF596B61;
     private static final int ACCENT = 0xFF6F9585;
     private static final int ON_ACCENT = 0xFF14251D;
     private static final int OUTLINE = 0x263D5147;
