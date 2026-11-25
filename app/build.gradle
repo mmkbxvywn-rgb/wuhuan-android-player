@@ -9,8 +9,12 @@ if (localPropsFile.exists()) {
         localProps.load(it)
     }
 }
-def hasReleaseSigning = localProps['storeFile'] && localProps['keyAlias'] && localProps['storePassword']
-def releaseKeyPassword = localProps['keyPassword'] ?: localProps['storePassword']
+// 本地开发可使用 local.properties；GitHub Actions 通过环境变量注入正式签名信息。
+def releaseStoreFile = System.getenv('WUHUAN_KEYSTORE_FILE') ?: localProps['storeFile']
+def releaseStorePassword = System.getenv('ANDROID_KEYSTORE_PASSWORD') ?: localProps['storePassword']
+def releaseKeyAlias = System.getenv('ANDROID_KEY_ALIAS') ?: localProps['keyAlias']
+def releaseKeyPassword = System.getenv('ANDROID_KEY_PASSWORD') ?: (localProps['keyPassword'] ?: releaseStorePassword)
+def hasReleaseSigning = releaseStoreFile && releaseKeyAlias && releaseStorePassword && releaseKeyPassword
 
 android {
     namespace = 'com.fongmi.android.tv'
@@ -57,10 +61,10 @@ android {
     signingConfigs {
         release {
             if (hasReleaseSigning) {
-                storeFile file(localProps['storeFile'])
-                keyAlias localProps['keyAlias']
+                storeFile file(releaseStoreFile)
+                keyAlias releaseKeyAlias
                 keyPassword releaseKeyPassword
-                storePassword localProps['storePassword']
+                storePassword releaseStorePassword
             }
         }
     }
