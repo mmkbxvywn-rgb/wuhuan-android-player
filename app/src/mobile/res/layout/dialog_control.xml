@@ -34,7 +34,8 @@
             android:contentDescription="@string/control_play_setting"
             android:padding="10dp"
             android:scaleType="centerInside"
-            android:src="@drawable/ic_action_close" />
+            android:src="@drawable/ic_action_close"
+            android:tint="?attr/colorOnSurface" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
