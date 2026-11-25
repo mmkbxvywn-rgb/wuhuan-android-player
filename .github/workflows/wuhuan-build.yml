@@ -49,7 +49,33 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      - name: Prepare release signing
+        id: signing
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        shell: bash
+        run: |
+          if [[ -n "$ANDROID_KEYSTORE_BASE64" && -n "$ANDROID_KEYSTORE_PASSWORD" && -n "$ANDROID_KEY_ALIAS" && -n "$ANDROID_KEY_PASSWORD" ]]; then
+            KEYSTORE_PATH="$RUNNER_TEMP/wuhuan-release.jks"
+            printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$KEYSTORE_PATH"
+            test -s "$KEYSTORE_PATH"
+            echo "mode=release-signed" >> "$GITHUB_OUTPUT"
+            echo "WUHUAN_KEYSTORE_FILE=$KEYSTORE_PATH" >> "$GITHUB_ENV"
+            echo "正式签名密钥已加载。"
+          else
+            echo "mode=debug-signed-test-only" >> "$GITHUB_OUTPUT"
+            echo "::warning::未配置完整正式签名 Secrets；本次 APK 使用 debug 签名，仅供临时测试，不能作为正式升级包。"
+          fi
+
       - name: Build mobile arm64 release variant
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          RUN_NUMBER: ${{ github.run_number }}
         run: |
           chmod +x ./gradlew
           ./gradlew :app:assembleMobileArm64_v8aRelease --no-daemon --console=plain
@@ -57,7 +83,7 @@ jobs:
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: wuhuan-android-mobile-arm64-${{ github.run_number }}
+          name: wuhuan-android-mobile-arm64-${{ steps.signing.outputs.mode }}-${{ github.run_number }}
           path: app/build/outputs/apk/mobileArm64_v8a/release/*.apk
           if-no-files-found: error
           retention-days: 14
