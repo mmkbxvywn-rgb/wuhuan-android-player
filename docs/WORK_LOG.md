@@ -284,3 +284,19 @@
 - `selector_control.xml` 明确区分选中、禁用、普通状态：选中为较深青绿，禁用为中性灰绿，普通为深青灰，移除浅色弹窗上不可读的白色文字。
 - `dialog_control.xml` 为播放设置关闭图标指定主题文字色，修复白色关闭符号在月白底上隐形的问题。
 - 本次修改已提交到 `wuhuan/development`；尚待 GitHub Actions 构建和真机复测，未宣称构建或验收通过。
+
+## 2026-11-25：正式签名 CI 接入（密钥待配置）
+
+### 已实施
+
+- `app/build.gradle` 支持从 GitHub Actions 环境变量读取 Keystore 路径、别名和密码；本地仍兼容 `local.properties`。
+- .github/workflows/wuhuan-build.yml 增加正式签名密钥加载步骤，密钥文件只写入 Actions 临时运行目录，不进入仓库。
+- 构建产物名称区分 `release-signed` 与 `debug-signed-test-only`；未配置完整 Secrets 时会在 Actions 日志中明确警告，避免把临时测试签名包误当成正式升级包。
+- 相关提交：Gradle `2a963e576174557c54f99f7efe2454577d8fe75d`；工作流 `3dbfd90db090037bade46b049df1aeb5c9859c46`。
+
+### 尚待完成 / 验证
+
+- 尚未生成并安全备份无患影音专用 Keystore。
+- 尚未在 GitHub 仓库配置 `ANDROID_KEYSTORE_BASE64`、`ANDROID_KEYSTORE_PASSWORD`、`ANDROID_KEY_ALIAS`、`ANDROID_KEY_PASSWORD` 四项 Actions Secrets。
+- 因此当前 Actions 构建仍可能使用 debug 签名；正式签名覆盖升级尚未验证。
+- 配置密钥后需连续构建两个版本，核对 APK 证书指纹一致，并在 Android 真机上验证覆盖安装和数据保留。
