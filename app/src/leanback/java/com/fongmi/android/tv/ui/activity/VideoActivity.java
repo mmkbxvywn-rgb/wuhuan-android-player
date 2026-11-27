@@ -23,7 +23,6 @@ import androidx.media3.common.C;
 import androidx.media3.common.MediaMetadata;
 import androidx.media3.common.Player;
 import androidx.media3.common.VideoSize;
-import androidx.media3.ui.PlayerSeekView;
 import androidx.media3.ui.PlayerView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
@@ -255,7 +254,7 @@ public class VideoActivity extends PlaybackActivity implements VodPlaybackHost, 
     }
 
     @Override
-    protected PlayerSeekView getSeekView() {
+    protected com.fongmi.android.tv.ui.custom.CustomSeekView getSeekView() {
         return mBinding.control.seek;
     }
 
