@@ -5,7 +5,7 @@
         <item name="colorOnPrimary">@color/wuhuan_ink</item>
         <item name="colorSurface">@color/wuhuan_surface</item>
         <item name="colorOnSurface">@color/wuhuan_ink</item>
-        <item name="android:windowBackground">@color/wuhuan_bg</item>
+        <item name="android:windowBackground">@drawable/tv_background</item>
         <item name="android:textColorPrimary">@color/wuhuan_ink</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowTranslucentStatus">true</item>
@@ -22,7 +22,7 @@
     <style name="Theme.App" parent="Theme.Base" />
 
     <style name="Theme.Crash" parent="Theme.Base">
-        <item name="android:windowBackground">@color/wuhuan_bg</item>
+        <item name="android:windowBackground">@drawable/tv_background</item>
         <item name="android:windowDisablePreview">true</item>
     </style>
 
