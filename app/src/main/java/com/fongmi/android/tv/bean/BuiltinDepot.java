@@ -32,7 +32,7 @@ public final class BuiltinDepot {
     public static List<Config> getConfigs() {
         List<Config> configs = new ArrayList<>();
         try {
-            String raw = readAsset("clys/chenlong.jpg");
+            String raw = readAsset("wuhuan/test-source.json");
             JsonObject object = Json.parse(raw).getAsJsonObject();
             if (!object.has("urls")) return configs;
 
