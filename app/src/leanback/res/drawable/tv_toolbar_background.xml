@@ -1,13 +1,13 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/wuhuan_surface_muted" />
+            <solid android:color="#88E7DAF0" />
         </shape>
     </item>
     <item android:gravity="bottom">
         <shape android:shape="rectangle">
             <size android:height="1dp" />
-            <solid android:color="@color/wuhuan_outline" />
+            <solid android:color="#668E83BD" />
         </shape>
     </item>
 </layer-list>
