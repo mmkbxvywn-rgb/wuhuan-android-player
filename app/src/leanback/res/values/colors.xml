@@ -1,16 +1,16 @@
 <resources>
-    <color name="white">#293730</color>
-    <color name="bg">#F5F7F3</color>
-    <color name="bg_dark">#EEF2ED</color>
-    <color name="primary">#6F9585</color>
-    <color name="accent">#6F9585</color>
-    <color name="surface">#FBFCF9</color>
-    <color name="surface_high">#EEF2ED</color>
-    <color name="wuhuan_bg">#F5F7F3</color>
-    <color name="wuhuan_surface">#FBFCF9</color>
-    <color name="wuhuan_surface_muted">#EEF2ED</color>
-    <color name="wuhuan_ink">#293730</color>
-    <color name="wuhuan_ink_muted">#596B61</color>
-    <color name="wuhuan_accent">#6F9585</color>
-    <color name="wuhuan_outline">#263D5147</color>
+    <color name="white">#26372F</color>
+    <color name="bg">#E4EAE4</color>
+    <color name="bg_dark">#D9E2DA</color>
+    <color name="primary">#668C79</color>
+    <color name="accent">#668C79</color>
+    <color name="surface">#EFF3EF</color>
+    <color name="surface_high">#E3EBE4</color>
+    <color name="wuhuan_bg">#E4EAE4</color>
+    <color name="wuhuan_surface">#EFF3EF</color>
+    <color name="wuhuan_surface_muted">#E3EBE4</color>
+    <color name="wuhuan_ink">#26372F</color>
+    <color name="wuhuan_ink_muted">#52645A</color>
+    <color name="wuhuan_accent">#668C79</color>
+    <color name="wuhuan_outline">#334B5A4F</color>
 </resources>
