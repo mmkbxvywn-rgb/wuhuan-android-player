@@ -95,6 +95,21 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
+      - name: Build Android TV armeabi-v7a test APK
+        env:
+          RUN_NUMBER: ${{ github.run_number }}
+        run: |
+          chmod +x ./gradlew
+          ./gradlew :app:assembleLeanbackArmeabi_v7aRelease --no-daemon --console=plain
+
+      - name: Upload Android TV armeabi-v7a test APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: wuhuan-android-tv-armeabi-v7a-debug-signed-test-only-${{ github.run_number }}
+          path: app/build/outputs/apk/leanbackArmeabi_v7a/release/*.apk
+          if-no-files-found: error
+          retention-days: 14
+
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
