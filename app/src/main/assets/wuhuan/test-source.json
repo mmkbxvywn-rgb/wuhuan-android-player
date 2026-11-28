@@ -2,19 +2,19 @@
   "urls": [
     {
       "name": "肥猫（社区维护快照）",
-      "url": "https://raw.githubusercontent.com/JianghaoPi/my-tvbox-sources/main/output/feimao.json"
+      "url": "https://cdn.jsdelivr.net/gh/JianghaoPi/my-tvbox-sources@main/output/feimao.json"
     },
     {
       "name": "饭太硬（社区维护快照）",
-      "url": "https://raw.githubusercontent.com/JianghaoPi/my-tvbox-sources/main/output/fantaiying.json"
+      "url": "https://cdn.jsdelivr.net/gh/JianghaoPi/my-tvbox-sources@main/output/fantaiying.json"
     },
     {
       "name": "王二小（社区维护快照）",
-      "url": "https://raw.githubusercontent.com/JianghaoPi/my-tvbox-sources/main/output/wangerxiao.json"
+      "url": "https://cdn.jsdelivr.net/gh/JianghaoPi/my-tvbox-sources@main/output/wangerxiao.json"
     },
     {
       "name": "小米（社区维护快照）",
-      "url": "https://raw.githubusercontent.com/JianghaoPi/my-tvbox-sources/main/output/xiaomi.json"
+      "url": "https://cdn.jsdelivr.net/gh/JianghaoPi/my-tvbox-sources@main/output/xiaomi.json"
     }
   ]
 }
